@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Users,Login
+from .models import Users,Login,Products
 from .forms import PostForm,GetForm
 from django.shortcuts import redirect
 
@@ -26,7 +26,7 @@ def login(request):
 		password1  = request.POST.get('password')
 		if Users.objects.filter(username=username1).exists():
 			if Users.objects.filter(password=password1).exists():
-				return redirect('/')
+				return redirect('/products')
 			else:
 				return render(request,'shop/login.html',{'login':login,'error_message':"Invalid Password"})
 		else:
@@ -36,4 +36,5 @@ def login(request):
 		return render(request,'shop/login.html',{'form':form})
 
 def products(request):
+	products=Products.objects.all()
 	return render(request,'shop/products.html',{'products':products})

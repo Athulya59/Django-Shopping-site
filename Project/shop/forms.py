@@ -10,3 +10,4 @@ class GetForm(forms.ModelForm):
 	class Meta:
 		model=Login
 		fields=('username','password',)
+
